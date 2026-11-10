@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#10100f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2310100f'/%3E%3Ctext x='32' y='46' text-anchor='middle' font-size='46' fill='%23e7ad51'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E" />
+  <title>Dungeon Keeper — The Last Chest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Dungeon Keeper home"><span class="brand-mark">✦</span><span>CRYPT<span class="brand-dim">KEEPER</span></span></a>
+      <div class="chapter"><span class="live-dot"></span><span>THE KING'S ROAD</span><b>·</b><span id="stageLabel">CHAPTER I — 1</span></div>
+      <div class="top-resources">
+        <div class="resource"><span class="coin-icon">◉</span><b id="goldTop">240</b><small>GOLD</small></div>
+        <div class="resource"><span class="gem-icon">◆</span><b id="gemsTop">36</b><small>GEMS</small></div>
+        <button class="icon-button" id="soundBtn" title="Toggle sound">♫</button>
+      </div>
+    </header>
+    <main class="layout">
+      <section class="battle-column">
+        <div class="battle-heading"><div><div class="eyebrow">DEFENSE IN PROGRESS <span class="red-pip"></span></div><h1>The Last <em>Chest</em></h1></div><div class="battle-controls"><button id="speedBtn" class="speed-btn">▶ 1×</button><button id="pauseBtn" class="pause-btn" aria-label="Pause">Ⅱ</button></div></div>
+        <div class="arena-wrap">
+          <canvas id="arena" aria-label="Tower defense battle arena"></canvas>
+          <div class="arena-vignette"></div>
+          <div class="wave-pill"><span class="wave-symbol">⚔</span><span>WAVE <b id="waveNum">1</b><small id="waveType">SCOUT PARTY</small></span></div>
+          <div class="objective-pill"><span>▣</span><div><small>CHEST INTEGRITY</small><b><span id="chestHp">100</span><i>%</i></b></div></div>
+          <div class="wave-progress"><span id="waveProgress"></span></div>
+          <div class="arena-bottom"><div class="enemy-count"><span class="skull">☠</span><span><b id="enemyCount">0</b> HEROES REMAINING</span></div><div class="mana-display"><span>✦</span><div><small>MANA</small><b id="manaValue">100</b></div><div class="mana-track"><i id="manaFill"></i></div></div></div>
+          <div class="toast" id="toast" role="status"></div>
+        </div>
+        <div class="spell-row"><div class="spell-label"><span class="eyebrow">DARK ARTS</span><span>Cast a spell</span></div>
+          <button class="spell-card" data-spell="fire"><span class="spell-icon fire">✹</span><span><b>HELLFIRE</b><small>Burning impact · 30 mana</small></span><kbd>1</kbd></button>
+          <button class="spell-card" data-spell="ice"><span class="spell-icon ice">❄</span><span><b>FROST NOVA</b><small>Slow all heroes · 25 mana</small></span><kbd>2</kbd></button>
+          <button class="spell-card" data-spell="bolt"><span class="spell-icon bolt">ϟ</span><span><b>SOUL CHAIN</b><small>Chain lightning · 35 mana</small></span><kbd>3</kbd></button>
+        </div>
+        <div class="battle-footnote"><span>☝</span> Tap an open sigil to deploy. Tap a minion to upgrade, retarget, or recall.
+      </section>
+      <aside class="side-column">
+        <section class="roster-panel panel"><div class="panel-head"><div><span class="eyebrow">YOUR NIGHTMARE ARMY</span><h2>Summoned <span>Minions</span></h2></div><button class="more-button" id="infoBtn" title="How to play">···</button></div>
+          <div class="roster-list" id="rosterList"></div>
+          <div class="deploy-hint"><span class="hint-orbit">✦</span><span>Select a minion, then tap a glowing<br>sigil on the battlefield to deploy.</span></div>
+        </section>
+        <section class="portal-panel panel"><div class="portal-title"><div class="portal-rune">◈</div><div><span class="eyebrow">SUMMONING PORTAL</span><h2>Call the <em>Unworthy</em></h2></div><div class="portal-glow"></div></div>
+          <div class="summon-options"><button class="summon-btn" id="summonOne"><span class="summon-orb">✦</span><span><b>Summon ×1</b><small>100 gems</small></span><span class="summon-cost">◆ 100</span></button><button class="summon-btn summon-ten" id="summonTen"><span class="summon-orb">✧</span><span><b>Summon ×10</b><small>Guaranteed Rare+</small></span><span class="summon-cost">◆ 900</span></button></div>
+          <div class="pity-line"><span>EPIC PITY</span><div class="pity-track"><i id="pityBar"></i></div><b id="pityCount">0 / 20</b></div>
+          <div class="banner-foot"><span>✧ Featured: <b>Ember Imp</b></span><button id="oddsBtn">SUMMON ODDS ↗</button></div>
+        </section>
+        <section class="quest-panel panel"><div class="quest-icon">♜</div><div class="quest-copy"><span class="eyebrow">DAILY CONTRACT</span><b>Repel the royal advance</b><small>Defeat 20 heroes for a reward</small><div class="quest-progress"><i id="questBar"></i></div></div><div class="quest-count"><b id="questCount">0</b><small>/ 20</small></div></section>
+        <section class="upgrade-panel panel"><div class="upgrade-copy"><span class="eyebrow">DUNGEON RESEARCH</span><b>Dark Bargain <span class="level-tag" id="bargainLevel">LV. 1</span></b><small>+10% gold earned per level</small></div><button id="bargainBtn" class="upgrade-btn"><span>UPGRADE</span><b id="bargainCost">120 ◉</b></button></section>
+      </aside>
+    </main>
+    <footer><span>© CRYPTKEEPER · A MOST UNWELCOME DEFENSE</span><span><i class="footer-dot"></i> AUTOSAVE ACTIVE</span></footer>
+  </div>
+  <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"><div class="modal" role="dialog" aria-modal="true"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
